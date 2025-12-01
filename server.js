@@ -11,17 +11,29 @@ import documentRoutes from "./routes/documentRoutes.js";
 const app = express();
 const server = http.createServer(app);
 
-app.use(
-  cors({
-    origin: "https://rag.sahilwarkhade.com",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+const allowedOrigins = ["http://localhost:5173",  "https://rag.sahilwarkhade.com"]
 
 
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  allowedHeaders: [
+    "Origin",
+    "X-Requested-With",
+    "Content-Type",
+    "Accept",
+    "Authorization",
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
