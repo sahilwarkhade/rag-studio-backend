@@ -1,4 +1,4 @@
-import "dotenv/config.js"
+import "dotenv/config.js";
 import express from "express";
 import cors from "cors";
 import http from "http";
@@ -11,9 +11,6 @@ import documentRoutes from "./routes/documentRoutes.js";
 const app = express();
 const server = http.createServer(app);
 
-await Promise.all([connectDb(), initChatWindowSocket(server)]);
-app.use(express.json());
-app.use(cookieParser());
 app.use(
   cors({
     origin: "https://rag.sahilwarkhade.com",
@@ -23,12 +20,20 @@ app.use(
   })
 );
 
-app.use("/auth", authRoutes);
+app.options("*", cors());
 
+app.use(express.json());
+app.use(cookieParser());
+
+await connectDb();
+await initChatWindowSocket(server);
+
+app.use("/auth", authRoutes);
 app.use(documentRoutes);
-app.get("/health", async (req, res) => {
-  return res.status(201).json({
-    success: "true",
+
+app.get("/health", (req, res) => {
+  return res.status(200).json({
+    success: true,
     message: "Working fine",
   });
 });
