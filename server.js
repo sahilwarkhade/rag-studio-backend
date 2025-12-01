@@ -1,3 +1,4 @@
+import "dotenv/config.js"
 import express from "express";
 import cors from "cors";
 import http from "http";
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://rag.sahilwarkhade.com",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],

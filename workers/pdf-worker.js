@@ -8,6 +8,7 @@ import { vectorStore } from "../services/qdrant.js";
 import Document from "../models/Document.js";
 import { connectDb } from "../config/mongoDb.js";
 import path from "node:path";
+import "dotenv/config.js"
 
 await connectDb();
 

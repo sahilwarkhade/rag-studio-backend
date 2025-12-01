@@ -5,7 +5,7 @@ import { connectionOptions, FILE_DELETE_QUEUE } from "../config/bullMq.js";
 import Document from "../models/Document.js";
 import ConversationalHistory from "../models/ConversationalHistory.js";
 import { deleteDocs } from "../services/searchService.js";
-
+import "dotenv/config.js"
 await connectDb();
 
 const deleteWorker = new Worker(
