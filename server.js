@@ -11,8 +11,10 @@ import documentRoutes from "./routes/documentRoutes.js";
 const app = express();
 const server = http.createServer(app);
 
-const allowedOrigins = ["http://localhost:5173",  "https://rag.sahilwarkhade.com"]
-
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://rag.sahilwarkhade.com",
+];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -33,6 +35,7 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 };
 
+app.options("/*", cors(corsOptions));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
