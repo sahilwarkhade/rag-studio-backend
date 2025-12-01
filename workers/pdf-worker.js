@@ -68,17 +68,17 @@ const pdfWorker = new Worker(
       }
 
       // File cleanup
-      if (doc?.fileUrl) {
-        try {
-          if (fscd.existsSync(doc.fileUrl)) {
-            await fs.unlink(doc.fileUrl);
-            console.log("🗑️ File deleted after failure");
-          }
-          console.log("File Not exist");
-        } catch (e) {
-          console.log("⚠️ Failed to delete failed file", e.message);
-        }
-      }
+      // if (doc?.fileUrl) {
+      //   try {
+      //     if (fscd.existsSync(doc.fileUrl)) {
+      //       await fs.unlink(doc.fileUrl);
+      //       console.log("🗑️ File deleted after failure");
+      //     }
+      //     console.log("File Not exist");
+      //   } catch (e) {
+      //     console.log("⚠️ Failed to delete failed file", e.message);
+      //   }
+      // }
 
       throw error;
     }
